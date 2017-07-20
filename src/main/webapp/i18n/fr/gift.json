@@ -1,0 +1,25 @@
+{
+    "ikadoApp": {
+        "gift" : {
+            "home": {
+                "title": "Gifts",
+                "createLabel": "Créer un nouveau Gift",
+                "createOrEditLabel": "Créer ou éditer un Gift"
+            },
+            "created": "Un nouveau Gift a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Gift avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Gift avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Gift {{ id }} ?"
+            },
+            "detail": {
+                "title": "Gift"
+            },
+            "name": "Name",
+            "file": "File",
+            "description": "Description",
+            "price": "Price",
+            "user": "User"
+        }
+    }
+}

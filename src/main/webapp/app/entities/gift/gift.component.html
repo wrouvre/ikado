@@ -1,0 +1,71 @@
+<div>
+    <h2>
+        <span jhiTranslate="ikadoApp.gift.home.title">Gifts</span>
+        <button class="btn btn-primary float-right jh-create-entity create-gift" [routerLink]="['/', { outlets: { popup: ['gift-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="ikadoApp.gift.home.createLabel">
+            Create new Gift
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="gifts">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span jhiTranslate="ikadoApp.gift.name">Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="file"><span jhiTranslate="ikadoApp.gift.file">File</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="description"><span jhiTranslate="ikadoApp.gift.description">Description</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="price"><span jhiTranslate="ikadoApp.gift.price">Price</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="user.login"><span jhiTranslate="ikadoApp.gift.user">User</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let gift of gifts ;trackBy: trackId">
+                <td><a [routerLink]="['../gift', gift.id ]">{{gift.id}}</a></td>
+                <td>{{gift.name}}</td>
+                <td>
+                    <a *ngIf="gift.file" (click)="openFile(gift.fileContentType, gift.file)">
+                        <img [src]="'data:' + gift.fileContentType + ';base64,' + gift.file" style="max-height: 30px;" alt="gift image"/>
+                    </a>
+                    <span *ngIf="gift.file">{{gift.fileContentType}}, {{byteSize(gift.file)}}</span>
+                </td>
+                <td>{{gift.description}}</td>
+                <td>{{gift.price}}</td>
+                <td>
+                    {{gift.user?.login}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../gift', gift.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'gift/'+ gift.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'gift/'+ gift.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

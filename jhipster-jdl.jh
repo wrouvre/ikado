@@ -1,0 +1,18 @@
+entity Gift {
+	name String,
+    file ImageBlob
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	User{gift} to
+	/**
+	* Another side of the same relationship
+	*/
+	Gift
+}
+
+service all with serviceImpl
+
+// Set an angular suffix
+angularSuffix * with mySuffix

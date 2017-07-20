@@ -1,0 +1,46 @@
+
+<div *ngIf="gift">
+    <h2><span jhiTranslate="ikadoApp.gift.detail.title">Gift</span> {{gift.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="ikadoApp.gift.name">Name</span></dt>
+        <dd>
+            <span>{{gift.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="ikadoApp.gift.file">File</span></dt>
+        <dd>
+            <div *ngIf="gift.file">
+                <a (click)="openFile(gift.fileContentType, gift.file)">
+                    <img [src]="'data:' + gift.fileContentType + ';base64,' + gift.file" style="max-width: 100%;" alt="gift image"/>
+                </a>
+                {{gift.fileContentType}}, {{byteSize(gift.file)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="ikadoApp.gift.description">Description</span></dt>
+        <dd>
+            <span>{{gift.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="ikadoApp.gift.price">Price</span></dt>
+        <dd>
+            <span>{{gift.price}}</span>
+        </dd>
+        <dt><span jhiTranslate="ikadoApp.gift.user">User</span></dt>
+        <dd>
+            {{gift.user?.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'gift/'+ gift.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>
