@@ -41,6 +41,7 @@ public class CacheConfiguration {
             cm.createCache(fr.ippon.ikado.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(fr.ippon.ikado.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(fr.ippon.ikado.domain.SocialUserConnection.class.getName(), jcacheConfiguration);
+            cm.createCache(fr.ippon.ikado.domain.Gift.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }
